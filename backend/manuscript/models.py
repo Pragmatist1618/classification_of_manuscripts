@@ -47,7 +47,8 @@ class Image(models.Model):
     # к какой рукописи относится
     # Каскадное удаление. Django эмулирует поведение SQL правила ON DELETE CASCADE
     # и так же удаляет объекты, связанные через ForeignKey
-    manuscript = models.ForeignKey(Manuscript, on_delete=models.CASCADE)
+    # (related_name='images') - для получения полей таблицы через сереалайзер рукописи
+    manuscript = models.ForeignKey(Manuscript, on_delete=models.CASCADE, related_name='images')
 
     def __str__(self):
         return str(self.id)

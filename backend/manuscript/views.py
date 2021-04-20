@@ -1,10 +1,10 @@
 from rest_framework import viewsets, permissions
+from .models import Manuscript, Image
+from .serializers import ManuscriptGetSerializer, ManuscriptSetSerializer, ImageSerializer
 
-from .models import Manuscript
-from .serializers import ManuscriptGetSerializer, ManuscriptSetSerializer
 
-
-# используем viewsets
+# используем viewsets т.к. нужны: `create()`, `retrieve()`, `update()`,
+#     `partial_update()`, `destroy()` and `list()` actions
 class ManuscriptViewSet(viewsets.ModelViewSet):
     # определяем набор данных
     queryset = Manuscript.objects.all()
@@ -24,3 +24,9 @@ class ManuscriptViewSet(viewsets.ModelViewSet):
         return ManuscriptSetSerializer
 
 
+class ImagesViewSet(viewsets.ModelViewSet):
+    queryset = Image.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = ImageSerializer

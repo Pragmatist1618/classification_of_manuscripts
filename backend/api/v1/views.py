@@ -1,8 +1,10 @@
 from rest_framework import viewsets, permissions
+
 from .models import Manuscript, Image
 from .serializers import ManuscriptGetSerializer, ManuscriptSetSerializer, ImageSerializer
 
 
+# TODO: добавить пагинацию
 # используем viewsets т.к. нужны: `create()`, `retrieve()`, `update()`,
 #     `partial_update()`, `destroy()` and `list()` actions
 class ManuscriptViewSet(viewsets.ModelViewSet):

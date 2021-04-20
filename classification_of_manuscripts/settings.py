@@ -58,7 +58,10 @@ ROOT_URLCONF = 'classification_of_manuscripts.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            # явно указываем где искать шаблоны!
+            os.path.join(BASE_DIR, 'frontend', 'about', 'templates')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

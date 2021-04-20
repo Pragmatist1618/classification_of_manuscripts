@@ -21,9 +21,13 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/manuscript/', include('backend.api.v1.urls'))
+    path('api/v1/manuscript/', include('backend.api.v1.urls')),
+    # TODO: rename to doc
+    path('about/', include('frontend.about.urls'), name='about'),
+    path('', include('frontend.index.urls'), name='index'),
 ]
 
+# пока сервер на локальной машине
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

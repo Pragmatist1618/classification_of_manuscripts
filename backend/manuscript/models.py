@@ -1,5 +1,5 @@
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
 
 
 # модель рукописи
@@ -13,6 +13,11 @@ class Manuscript(models.Model):
     author = models.CharField(max_length=255, null=True, blank=True)
     # место хранения
     storage = models.CharField(max_length=255, null=True, blank=True)
+    # дата создания
+    # используем чар, так как тип даты не имеет строгого формата (может быть указан период)
+    # но для поиска по дате, придется придерживаться однообразного стиля
+    # TODO: придумать формат стиля
+    creation_date = models.CharField(max_length=255, default='Неизвестно')
     # TODO: Создать разделение на Евангелия и Лекционарий (?) category
     # Указатель на Евангелия
     GOSPEL_CHOICES = [

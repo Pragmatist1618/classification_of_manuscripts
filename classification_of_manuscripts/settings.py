@@ -54,13 +54,17 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'classification_of_manuscripts.urls'
+# TODO: посмотреть почему не работает
+# SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            # явно указываем где искать шаблоны!
-            os.path.join(BASE_DIR, 'frontend', 'about', 'templates')
+            # явно указываем где искать шаблоны
+            os.path.join(BASE_DIR, 'frontend', 'about', 'templates'),
+            os.path.join(BASE_DIR, 'frontend', 'index', 'templates')
+            # os.path.join(SETTINGS_PATH, 'templates')
         ],
         'APP_DIRS': True,
         'OPTIONS': {

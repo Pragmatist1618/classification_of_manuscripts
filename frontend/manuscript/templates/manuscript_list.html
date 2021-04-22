@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock title %}
+
+
+{% block content %}
+    {% for manuscript_info in manuscript_list_api %}
+        <h1><a href="{% url 'manuscript_item' manuscript_info.id %}">{{ manuscript_info.title }}</a></h1>
+        {% for img in manuscript_info.images %}
+            <a rel="nofollow" target="_blank" href="{{ img.image }}">
+                <img src="{{ img.image }}" width="100" height="100">
+            </a>
+        {% endfor %}
+        {% if manuscript_info.author %}
+            <p><u>Author:</u> {{ manuscript_info.author }}</p>
+        {% endif %}
+        {% if manuscript_info.storage %}
+            <p><u>Storage:</u> {{ manuscript_info.storage }}</p>
+        {% endif %}
+        {% if manuscript_info.creation_date %}
+            <p><u>Creation date:</u> {{ manuscript_info.creation_date }}</p>
+        {% endif %}
+        {% if manuscript_info.gospel %}
+            <p><u>Gospel:</u> {{ manuscript_info.gospel }}</p>
+        {% endif %}
+        {% if manuscript_info.lectionary %}
+            <p><u>Lectionary:</u> {{ manuscript_info.lectionary }}</p>
+        {% endif %}
+        {% if manuscript_info.lectionary_description %}
+            <p><u>Lectionary description:</u> {{ manuscript_info.lectionary_description }}</p>
+        {% endif %}
+        {% if manuscript_info.description %}
+            <p><u>Description:</u> {{ manuscript_info.description }}</p>
+        {% endif %}
+    {% endfor %}
+{% endblock %}
+
+
+

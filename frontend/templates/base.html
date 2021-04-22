@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Base{% endblock title %}</title>
+</head>
+<body>
+    <ul>
+        <li><a href="{% url 'index' %}">Home</a></li>
+        <li><a href="{% url 'manuscript' %}">Manuscript</a></li>
+    </ul>
+{% block content %}
+
+{% endblock content %}
+</body>
+</html>

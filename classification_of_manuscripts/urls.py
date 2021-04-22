@@ -25,6 +25,7 @@ urlpatterns = [
     # TODO: rename to doc
     path('about/', include('frontend.about.urls'), name='about'),
     path('', include('frontend.index.urls'), name='index'),
+    path('manuscript/', include('frontend.manuscript.urls'), name='index'),
 ]
 
 # пока сервер на локальной машине

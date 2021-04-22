@@ -41,6 +41,9 @@ INSTALLED_APPS = [
 
     'backend.api.v1',
     'rest_framework',
+    'frontend.index',
+    'frontend.about',
+    'frontend.manuscript',
 ]
 
 MIDDLEWARE = [
@@ -62,8 +65,10 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             # явно указываем где искать шаблоны
+            os.path.join(BASE_DIR, 'frontend', 'templates'),
+            os.path.join(BASE_DIR, 'frontend', 'index', 'templates'),
             os.path.join(BASE_DIR, 'frontend', 'about', 'templates'),
-            os.path.join(BASE_DIR, 'frontend', 'index', 'templates')
+            os.path.join(BASE_DIR, 'frontend', 'manuscript', 'templates')
             # os.path.join(SETTINGS_PATH, 'templates')
         ],
         'APP_DIRS': True,

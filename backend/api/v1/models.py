@@ -7,6 +7,7 @@ class Manuscript(models.Model):
     # название (шифр рукописи)
     # (unique=True) - Наименование должно быть уникально
     title = models.CharField(max_length=255, unique=True)
+    # todo: delete field
     # автор
     # (null=True) - Поле может хранить null
     # (blank=True) - проверка формы позволит ввести пустое значение
@@ -16,7 +17,7 @@ class Manuscript(models.Model):
     # дата создания
     # используем чар, так как тип даты не имеет строгого формата (может быть указан период)
     # но для поиска по дате, придется придерживаться однообразного стиля
-    # TODO: придумать формат стиля
+    # TODO: придумать формат стиля (год, интервал лет, век, часть века)
     creation_date = models.CharField(max_length=255, default='Неизвестно')
     # TODO: Создать разделение на Евангелия и Лекционарий (?) category
     # Указатель на Евангелия
@@ -30,6 +31,7 @@ class Manuscript(models.Model):
     gospel = models.CharField(max_length=7, choices=GOSPEL_CHOICES, null=True, blank=True)
     # Лекционарий (является ли таковым)
     lectionary = models.BooleanField(default=False)
+    # todo: праздничные и ежедневные
     # Набор описания Лекционария
     lectionary_description = models.JSONField(null=True, blank=True)
     # Общие отличительные характеричтики

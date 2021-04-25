@@ -1,7 +1,16 @@
-article{
+nav.navbar {
+    padding-left: 30px;
+}
+
+article {
     /*background-color: silver;*/
 }
-aside{
+
+#main {
+
+}
+
+#aside {
     /*background-color: olive;*/
     float:right;
     width:200px;
@@ -9,10 +18,21 @@ aside{
     border: 2px solid;
     border-radius: 30px;
     border-color: black;
-    padding-left: 10px;
-    margin-right: 10px;
+    margin: 0 auto;
+    margin-top: 30px;
+
 }
 
 #filter_title{
     text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: #103492;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #03174a;
 }

@@ -38,6 +38,7 @@ $(document).ready(function () {
         }
     })
 
+
      // при нажатии на чексбокс фильтра не Лекционарий
     function set_not_lectionary_filter(){
         let manuscripts = document.querySelectorAll('.manuscript-item');

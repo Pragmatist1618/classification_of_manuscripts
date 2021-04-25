@@ -3,14 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Base{% endblock title %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
 </head>
 <body>
+<header>
+
+</header>
+
+<nav>
     <ul>
         <li><a href="{% url 'index' %}">Home</a></li>
         <li><a href="{% url 'manuscript' %}">Manuscript</a></li>
     </ul>
-{% block content %}
+    <hr>
+</nav>
 
-{% endblock content %}
+
+<article>
+    {% block content %}
+
+    {% endblock content %}
+</article>
+
+<footer>
+
+</footer>
+
+<script src="{% static 'js/jquery.js' %}"></script>
+<script src="{% static 'js/ajax.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>

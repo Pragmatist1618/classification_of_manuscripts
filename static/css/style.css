@@ -1,0 +1,18 @@
+article{
+    /*background-color: silver;*/
+}
+aside{
+    /*background-color: olive;*/
+    float:right;
+    width:200px;
+    height:250px;
+    border: 2px solid;
+    border-radius: 30px;
+    border-color: black;
+    padding-left: 10px;
+    margin-right: 10px;
+}
+
+#filter_title{
+    text-align: center;
+}

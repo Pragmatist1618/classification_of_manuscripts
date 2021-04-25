@@ -6,35 +6,56 @@
 
 
 {% block content %}
-    {% for manuscript_info in manuscript_list_api %}
-        <h1><a href="{% url 'manuscript_item' manuscript_info.id %}">{{ manuscript_info.title }}</a></h1>
-        {% for img in manuscript_info.images %}
-            <a rel="nofollow" target="_blank" href="{{ img.image }}">
-                <img src="{{ img.image }}" width="100" height="100">
-            </a>
-        {% endfor %}
-        {% if manuscript_info.author %}
-            <p><u>Author:</u> {{ manuscript_info.author }}</p>
-        {% endif %}
-        {% if manuscript_info.storage %}
-            <p><u>Storage:</u> {{ manuscript_info.storage }}</p>
-        {% endif %}
-        {% if manuscript_info.creation_date %}
-            <p><u>Creation date:</u> {{ manuscript_info.creation_date }}</p>
-        {% endif %}
-        {% if manuscript_info.gospel %}
-            <p><u>Gospel:</u> {{ manuscript_info.gospel }}</p>
-        {% endif %}
-        {% if manuscript_info.lectionary %}
-            <p><u>Lectionary:</u> {{ manuscript_info.lectionary }}</p>
-        {% endif %}
-        {% if manuscript_info.lectionary_description %}
-            <p><u>Lectionary description:</u> {{ manuscript_info.lectionary_description }}</p>
-        {% endif %}
-        {% if manuscript_info.description %}
-            <p><u>Description:</u> {{ manuscript_info.description }}</p>
-        {% endif %}
-    {% endfor %}
+    <div class="container main">
+        <div class="row">
+            <div class="col-9">
+                {% for manuscript_info in manuscript_list_api %}
+                    <div class="manuscript-item">
+                        <a href="{% url 'manuscript_item' manuscript_info.id %}"><h1>{{ manuscript_info.title }}</h1>
+                        </a>
+                        {% for img in manuscript_info.images %}
+                            <a rel="nofollow" target="_blank" href="{{ img.image }}">
+                                <img src="{{ img.image }}" width="100" height="100">
+                            </a>
+                        {% endfor %}
+                        {% if manuscript_info.author %}
+                            <p><u>Author:</u> {{ manuscript_info.author }}</p>
+                        {% endif %}
+                        {% if manuscript_info.storage %}
+                            <p><u>Storage:</u> {{ manuscript_info.storage }}</p>
+                        {% endif %}
+                        {% if manuscript_info.creation_date %}
+                            <p><u>Creation date:</u> {{ manuscript_info.creation_date }}</p>
+                        {% endif %}
+                        {% if manuscript_info.gospel %}
+                            <p><u>Gospel:</u> {{ manuscript_info.gospel }}</p>
+                        {% endif %}
+                        {% if manuscript_info.lectionary %}
+                            <p class="lectionary"><u>Lectionary:</u> {{ manuscript_info.lectionary }}</p>
+                        {% endif %}
+                        {% if manuscript_info.lectionary_description %}
+                            <p><u>Lectionary description:</u> {{ manuscript_info.lectionary_description }}</p>
+                        {% endif %}
+                        {% if manuscript_info.description %}
+                            <p><u>Description:</u> {{ manuscript_info.description }}</p>
+                        {% endif %}
+                        <hr>
+                    </div>
+                {% endfor %}
+            </div>
+            <div id="aside" class="col-3">
+                <h2 id="filter_title">Фильтры:</h2>
+                <div>
+                    <input type="checkbox" id="is_lectionary" name="is_lectionar">
+                    <label for="is_lectionary">Лекционарий</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="not_lectionary" name="not_lectionar">
+                    <label for="not_lectionary">Не лекционарий</label>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 

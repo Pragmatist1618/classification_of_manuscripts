@@ -6,53 +6,173 @@
 
 
 {% block content %}
+{#    {{ manuscript_list_api }}#}
     <div class="container main">
         <div class="row">
-            <div class="col-9">
+            <div class="col-7">
                 {% for manuscript_info in manuscript_list_api %}
-                    <div class="manuscript-item">
-                        <a href="{% url 'manuscript_item' manuscript_info.id %}"><h1>{{ manuscript_info.title }}</h1>
+                    <div class="manuscript-item"
+                                data-creation-date-bgn="{{ manuscript_info.creation_date_bgn }}"
+                                data-creation-date-end="{{ manuscript_info.creation_date_end }}">
+                        <a href="{% url 'manuscript-item' manuscript_info.id %}"><h1 class="cipher-name">{{ manuscript_info.cipher }}</h1>
                         </a>
                         {% for img in manuscript_info.images %}
-                            <a rel="nofollow" target="_blank" href="{{ img.image }}">
-                                <img src="{{ img.image }}" width="100" height="100">
+                            <a rel="nofollow" href="{% url "manuscript-img" img.id %}" class="img"
+                               data-lec-month-type="{{ img.lec_month_type }}"
+                               data-gospel="{{ img.gospel }}"
+                               data-lec-part-type="{{ img.lec_part_type }}"
+                               data-part-of-list="{{ img.part_of_list }}"
+                               data-list-number="{{ img.list_number }}"
+                               data-chapter="{{ img.chapter }}"
+                               data-verse="{{ img.verse }}"
+                               data-verse-quote="{{ img.verse_quote }}"
+                               data-image-name="{{ img.image_name }}"
+                               data-creation-date-bgn="{{ img.creation_date_bgn }}"
+                               data-creation-date-end="{{ img.creation_date_end }}"
+                            >
+                                <img src="{{ img.image }}" width="100" height="100" alt="">
                             </a>
                         {% endfor %}
-                        {% if manuscript_info.author %}
-                            <p><u>Author:</u> {{ manuscript_info.author }}</p>
-                        {% endif %}
-                        {% if manuscript_info.storage %}
-                            <p><u>Storage:</u> {{ manuscript_info.storage }}</p>
-                        {% endif %}
-                        {% if manuscript_info.creation_date %}
-                            <p><u>Creation date:</u> {{ manuscript_info.creation_date }}</p>
-                        {% endif %}
-                        {% if manuscript_info.gospel %}
-                            <p><u>Gospel:</u> {{ manuscript_info.gospel }}</p>
-                        {% endif %}
-                        {% if manuscript_info.lectionary %}
-                            <p class="lectionary"><u>Lectionary:</u> {{ manuscript_info.lectionary }}</p>
-                        {% endif %}
-                        {% if manuscript_info.lectionary_description %}
-                            <p><u>Lectionary description:</u> {{ manuscript_info.lectionary_description }}</p>
-                        {% endif %}
-                        {% if manuscript_info.description %}
-                            <p><u>Description:</u> {{ manuscript_info.description }}</p>
+                        <p class="storage"><u>Storage:</u> {{ manuscript_info.storage }}</p>
+                        <p><u>Creation date:</u> {{ manuscript_info.creation_date }}</p>
+                        <p class="type"><u>Type:</u> {{ manuscript_info.type }}</p>
+                        {% if manuscript_info.lec_type %}
+                            <p class="lec_type"><u>Lec type:</u> {{ manuscript_info.lec_type }}</p>
                         {% endif %}
                         <hr>
                     </div>
                 {% endfor %}
             </div>
-            <div id="aside" class="col-3">
+            <div id="aside" class="col-5">
                 <h2 id="filter_title">Фильтры:</h2>
+
+                <u class="h4">Фильтр по рукописям:</u>
                 <div>
-                    <input type="checkbox" id="is_lectionary" name="is_lectionar">
-                    <label for="is_lectionary">Лекционарий</label>
+                    Type: <br>
+                    <select name="type" id="type">
+                        <option value="-">Не выбрано</option>
+                        <option value="lect">Лекцеонарий</option>
+                        <option value="tetr">Четвероевангелие</option>
+                        <option value="unkn">Неизвестно</option>
+                    </select>
                 </div>
                 <div>
-                    <input type="checkbox" id="not_lectionary" name="not_lectionar">
-                    <label for="not_lectionary">Не лекционарий</label>
+                    Storage: <br>
+                    <select name="storage" id="storage">
+                        <option value="-">Не выбрано</option>
+                        {% for storage in storages %}
+                            <option value="{{ storage }}">{{ storage }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
+                <div>
+                    Lec type: <br>
+                    <select name="lec_type" id="lec_type">
+                        <option value="-">Не выбрано</option>
+                        {% for lec_type in lec_types %}
+                            <option value="{{ lec_type }}">{{ lec_type }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    Creation_date: <br>
+                    <div class="input-group input-group-sm">
+                        <input type="text" id="man-creation-date-input" class="form-control">
+                        <button type="button" id="man-creation-date-btn" class="btn-outline-dark btn">Применить</button>
+                    </div>
+                </div>
+                <div>
+                    Cipher: <br>
+                    <div class="input-group input-group-sm">
+                        <input type="text" id="cipher-input" class="form-control">
+                        <button type="button" id="cipher-btn" class="btn-outline-dark btn">Применить</button>
+                    </div>
+                </div>
+
+
+                <br>
+                <u class="h4">Фильтр по изображениям:</u>
+
+                <div>
+                    Lec month type: <br>
+                    <select name="lec_month_type" id="lec_month_type">
+                        <option value="-">Не выбрано</option>
+                        {% for lec_month in lec_month_choices %}
+                            <option value="{{ lec_month }}">{{ lec_month }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    Creation_date: <br>
+                    <div class="input-group input-group-sm">
+                        <input type="text" id="img-creation-date-input" class="form-control">
+                        <button type="button" id="img-creation-date-btn" class="btn-outline-dark btn">Применить</button>
+                    </div>
+                </div>
+                <div>
+                    Gospel: <br>
+                    <select name="gospel" id="gospel">
+                        <option value="-">Не выбрано</option>
+                        {% for gospel in gospels %}
+                            <option value="{{ gospel }}">{{ gospel }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                List_number: <br>
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control" id="list-number-input">
+                        <button type="button" class="btn-outline-dark btn" id="list-number-btn">Применить</button>
+                    </div>
+                </div>
+                <div>
+                    Part_of_list: <br>
+                    <select name="part_of_list" id="part_of_list">
+                        <option value="-">Не выбрано</option>
+                        {% for part_of_list in part_of_lists %}
+                            <option value="{{ part_of_list }}">{{ part_of_list }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    Lec_part_type: <br>
+                    <select name="lec_part_type" id="lec_part_type">
+                        <option value="-">Не выбрано</option>
+                        {% for lec_part_type in lec_part_types %}
+                            <option value="{{ lec_part_type }}">{{ lec_part_type }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    Chapter :<br>
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control" id="chapter-input">
+                        <button type="button" class="btn-outline-dark btn" id="chapter-btn">Применить</button>
+                    </div>
+                </div>
+                <div>
+                    Verse :<br>
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control" id="verse-input">
+                        <button type="button" class="btn-outline-dark btn" id="verse-btn">Применить</button>
+                    </div>
+                </div>
+                <div>
+                    Verse_quote :<br>
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control" id="verse-quote-input">
+                        <button type="button" class="btn-outline-dark btn" id="verse-quote-btn">Применить</button>
+                    </div>
+                </div>
+                <div>
+                    Image_name :<br>
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control" id="image-name-input">
+                        <button type="button" class="btn-outline-dark btn" id="image-name-btn">Применить</button>
+                    </div>
+                </div>
+                <br>
+                <button type="button" class="btn-dark btn" id="filters_clear">Сбросить все фильтры</button>
             </div>
         </div>
     </div>

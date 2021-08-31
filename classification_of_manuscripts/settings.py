@@ -54,6 +54,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'frontend.manuscript.middleware.MyMiddleware',
 ]
 
 ROOT_URLCONF = 'classification_of_manuscripts.urls'
@@ -143,3 +145,4 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
     # os.path.join(BASE_DIR, 'static_dev'),
 ]
+

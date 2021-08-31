@@ -6,33 +6,33 @@
 
 
 {% block content %}
-    <h1>{{ manuscript.title }}</h1>
-    {% for img in manuscript.images %}
-        <a rel="nofollow" target="_blank" href="{{ img.image }}">
-            <img src="{{ img.image }}" width="300" height="200">
-        </a>
-    {% endfor %}
-    {% if manuscript.author %}
-        <p><u>Author:</u> {{ manuscript.author }}</p>
+    <h1>{{ manuscript.cipher }}</h1>
+    <div>
+        {% for img in manuscript.images %}
+            <div class="img-container">
+                <a rel="nofollow" href="{% url "manuscript-img" img.id %}">
+                    <img src="{{ img.image }}" id="img_{{ img.id }}" class="north image">
+                </a>
+                <button type="submit" class="btn img-btn btn-outline-dark rotate-img" data-rotate-id="{{ img.id }}">Повернуть </button>
+            </div>
+        {% endfor %}
+    </div>
+{#    {% if manuscript.author %}#}
+{#        <p><u>Author:</u> {{ manuscript.author }}</p>#}
+{#    {% endif %}#}
+    <p><u>Storage:</u> {{ manuscript.storage }}</p>
+    <p><u>Creation date:</u> {{ manuscript.creation_date }}</p>
+    <p><u>Type:</u> {{ manuscript.type }}</p>
+    {% if manuscript.lec_type %}
+        <p><u>Lec type:</u> {{ manuscript.lec_type }}</p>
     {% endif %}
-    {% if manuscript.storage %}
-        <p><u>Storage:</u> {{ manuscript.storage }}</p>
+    {% if manuscript.man_description %}
+        <p><u>Manuscript description:</u> {{ manuscript.man_description }}</p>
     {% endif %}
-    {% if manuscript.creation_date %}
-        <p><u>Creation date:</u> {{ manuscript.creation_date }}</p>
+    {% if manuscript_info.bibliography %}
+        <p><u>Bibliography:</u> {{ manuscript_info.bibliography }}</p>
     {% endif %}
-    {% if manuscript.gospel %}
-        <p><u>Gospel:</u> {{ manuscript.gospel }}</p>
-    {% endif %}
-    {% if manuscript.lectionary %}
-        <p><u>Lectionary:</u> {{ manuscript.lectionary }}</p>
-    {% endif %}
-    {% if manuscript.lectionary_description %}
-        <p><u>Lectionary description:</u> {{ manuscript.lectionary_description }}</p>
-    {% endif %}
-    {% if manuscript.description %}
-        <p><u>Description:</u> {{ manuscript.description }}</p>
-    {% endif %}
+{#{{ manuscript }}#}
 {% endblock %}
 
 

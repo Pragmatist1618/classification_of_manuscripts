@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock title %}
+
+
+{% block content %}
+    <h1>{{ manuscript.cipher }}</h1>
+        <a rel="nofollow" target="_blank" href="{{ manuscript.image }}">
+            <img src="{{ manuscript.image }}" width="300" height="200">
+        </a>
+{#    {% if manuscript.author %}#}
+{#        <p><u>Author:</u> {{ manuscript.author }}</p>#}
+{#    {% endif %}#}
+    <p><u>Image_name:</u> {{ manuscript.image_name }}</p>
+    {% if manuscript.img_description %}
+        <p><u>Img_description:</u> {{ manuscript.img_description }}</p>
+    {% endif %}
+    <p><u>Storage:</u> {{ manuscript.storage }}</p>
+    <p><u>Creation date:</u> {{ manuscript.creation_date }}</p>
+    <p><u>Type:</u> {{ manuscript.type }}</p>
+    {% if manuscript.lec_type %}
+        <p><u>Lec type:</u> {{ manuscript.lec_type }}</p>
+    {% endif %}
+    <p><u>Gospel:</u> {{ manuscript.gospel }}</p>
+    <p><u>Chapter:</u> {{ manuscript.chapter }}</p>
+    <p><u>Verse:</u> {{ manuscript.verse }}</p>
+    {% if manuscript.verse_quote %}
+        <p><u>Verse_quote:</u> {{ manuscript.verse_quote }}</p>
+    {% endif %}
+    {% if manuscript_info.bibliography %}
+        <p><u>Bibliography:</u> {{ manuscript_info.bibliography }}</p>
+    {% endif %}
+    {% if manuscript_info.part_of_list %}
+        <p><u>Part of list:</u> {{ manuscript_info.part_of_list }}</p>
+    {% endif %}
+
+{{ manuscript }}
+{% endblock %}
+
+
+

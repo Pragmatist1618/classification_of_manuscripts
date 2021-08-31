@@ -1,8 +1,11 @@
+from django.urls import path
 from rest_framework import routers
 
-from .views import ManuscriptViewSet, ImagesViewSet
+from .views import ManuscriptViewSet, ImagesViewSet, ImageInfoView, img_rotate
 
 urlpatterns = [
+    path('img-info/<int:pk>/', ImageInfoView.as_view(), name='manuscript-img-details'),
+    path('img_rotate/<int:pk>/', img_rotate, name='img_rotate'),
 
 ]
 

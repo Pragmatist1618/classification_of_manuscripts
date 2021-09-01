@@ -403,7 +403,10 @@ $(document).ready(function (message) {
                     (val_bgn < date_bgn && val_end >= date_bgn && val_end <= date_end) ||
                     (val_bgn >= date_bgn && val_bgn <= date_end && val_end >= date_end) ||
                     (val_bgn < date_bgn && val_end >= date_end))) {
+                    // console.log('No', date_bgn, date_end, val_bgn, val_end)
                     manuscript.style.display = 'none';
+                } else{
+                    // console.log('Yes', date_bgn, date_end, val_bgn, val_end)
                 }
             }
         } else {
@@ -546,6 +549,7 @@ $(document).ready(function (message) {
         }
     }
 
+
     // LINK FILTER MAN TYPE
     if (document.getElementsByClassName('link-type')) {
         let links = document.getElementsByClassName('link-type');
@@ -566,6 +570,30 @@ $(document).ready(function (message) {
         let val = this.text;
         $("option:contains("+val+")").attr('selected', true)
         refilter();
+    }
+
+
+    // LINK MAN DATE
+    if (document.getElementsByClassName('man-date')) {
+        let links = document.getElementsByClassName('man-date');
+        for (let i = 0, len = links.length; i < len; i++) {
+            links[i].addEventListener('click', link_date, true);
+        }
+    }
+
+    function link_date() {
+        let date_bgn = this.getAttribute("data-date-bgn");
+        let date_end = this.getAttribute("data-date-end");
+        if (date_bgn !== 'None'){
+            let date;
+            if (date_bgn === date_end){
+                date = date_bgn;
+            } else {
+                date = date_bgn + '-' + date_end;
+            }
+            input_man_creation_date.val(date);
+            refilter();
+        }
     }
 
     //функция выравнивания высоты и ширины изображений для корректного поворота

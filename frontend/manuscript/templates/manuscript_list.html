@@ -36,7 +36,12 @@
                             </a>
                         {% endfor %}
                         <p class="storage"><u>Storage:</u> <a href="#" class="link-storage">{{ manuscript_info.storage }}</a></p>
-                        <p><u>Creation date:</u> {{ manuscript_info.creation_date }}</p>
+                        <p><u>Creation date:</u>
+                            <a href="#" class="man-date" data-date-bgn="{{ manuscript_info.creation_date_bgn }}"
+                                                         data-date-end="{{ manuscript_info.creation_date_end }}">
+                           {{ manuscript_info.creation_date }}
+                            </a>
+                        </p>
                         <p class="type"><u>Type:</u> <a href="#" class="link-type">{{ manuscript_info.type }}</a></p>
                         {% if manuscript_info.lec_type %}
                             <p class="lec_type"><u>Lec type:</u> <a href="#" class="link-lec-type">{{ manuscript_info.lec_type }}</a></p>

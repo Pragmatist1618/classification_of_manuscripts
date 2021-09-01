@@ -181,7 +181,6 @@ $(document).ready(function (message) {
             } else {
                 man_val = '-';
             }
-
             if ((man_val !== lec_type_val) && (lec_type_val !== '-')) {
                 manuscript.style.display = 'none';
             }
@@ -528,16 +527,6 @@ $(document).ready(function (message) {
                 }
             }
         }
-        // let val = input_image_name.val();
-        // let imgs = document.querySelectorAll('.img');
-        // for (let img of imgs) {
-        //     let image_name = img.getAttribute("data-image-name")
-        //     if (val !== "") {
-        //         if (!image_name.toLowerCase().includes(val.toLowerCase())) {
-        //             img.style.display = 'none';
-        //         }
-        //     }
-        // }
     }
 
     function is_update() {
@@ -546,6 +535,37 @@ $(document).ready(function (message) {
 
     if (document.getElementById('is_update')) {
         document.getElementById('is_update').addEventListener('click', is_update, true);
+    }
+
+
+    // LINK FILTER MAN STORAGE
+    if (document.getElementsByClassName('link-storage')) {
+        let links = document.getElementsByClassName('link-storage');
+        for (let i = 0, len = links.length; i < len; i++) {
+            links[i].addEventListener('click', link_input, true);
+        }
+    }
+
+    // LINK FILTER MAN TYPE
+    if (document.getElementsByClassName('link-type')) {
+        let links = document.getElementsByClassName('link-type');
+        for (let i = 0, len = links.length; i < len; i++) {
+            links[i].addEventListener('click', link_input, true);
+        }
+    }
+
+    // LINK FILTER MAN LEC TYPE
+    if (document.getElementsByClassName('link-lec-type')) {
+        let links = document.getElementsByClassName('link-lec-type');
+        for (let i = 0, len = links.length; i < len; i++) {
+            links[i].addEventListener('click', link_input, true);
+        }
+    }
+
+    function link_input() {
+        let val = this.text;
+        $("option:contains("+val+")").attr('selected', true)
+        refilter();
     }
 
     //функция выравнивания высоты и ширины изображений для корректного поворота
@@ -592,7 +612,6 @@ $(document).ready(function (message) {
             url: '/api/v1/manuscript/img_rotate/' + id + '/',
             success: function(response) {
                 let img = $('#img_' + id);
-                console.log();
                 if(img.hasClass('north')){
                     img.removeClass('north');
                     img.addClass('west');

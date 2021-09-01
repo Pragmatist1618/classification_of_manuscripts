@@ -6,9 +6,6 @@
 
 
 {% block content %}
-{#    {{ manuscript_list_api }}#}
-{#    {{ to_update_man }}#}
-{#    {{ to_update_img }}#}
     <div class="container main">
         <div class="row">
             <div class="col-7">
@@ -38,11 +35,11 @@
                                 <img src="{{ img.image }}" width="100" height="100" alt="" class="image">
                             </a>
                         {% endfor %}
-                        <p class="storage"><u>Storage:</u> {{ manuscript_info.storage }}</p>
+                        <p class="storage"><u>Storage:</u> <a href="#" class="link-storage">{{ manuscript_info.storage }}</a></p>
                         <p><u>Creation date:</u> {{ manuscript_info.creation_date }}</p>
-                        <p class="type"><u>Type:</u> {{ manuscript_info.type }}</p>
+                        <p class="type"><u>Type:</u> <a href="#" class="link-type">{{ manuscript_info.type }}</a></p>
                         {% if manuscript_info.lec_type %}
-                            <p class="lec_type"><u>Lec type:</u> {{ manuscript_info.lec_type }}</p>
+                            <p class="lec_type"><u>Lec type:</u> <a href="#" class="link-lec-type">{{ manuscript_info.lec_type }}</a></p>
                         {% endif %}
                         <hr>
                     </div>
@@ -56,9 +53,9 @@
                     Type: <br>
                     <select name="type" id="type">
                         <option value="-">Не выбрано</option>
-                        <option value="lect">Лекцеонарий</option>
-                        <option value="tetr">Четвероевангелие</option>
-                        <option value="unkn">Неизвестно</option>
+                        <option value="lect">Lect</option>
+                        <option value="tetr">Tetr</option>
+                        <option value="unkn">Unkn</option>
                     </select>
                 </div>
                 <div>

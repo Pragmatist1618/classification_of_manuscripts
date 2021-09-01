@@ -58,18 +58,26 @@ class Manuscript_list(View):
 
         context['lec_month_choices'] = LEC_MONTH_CHOICES
 
-        to_update = {}
+        to_update_man = []
+        to_update_img = []
+        man_fields = ['storage', 'creation_date', 'cipher', 'man_description', 'bibliography']
+        img_fields = ['creation_date', 'list_number', 'part_of_list', 'chapter', 'verse', 'verse_quote',
+                      'image_name', 'img_description']
         for manuscript in manuscript_list_api.json():
-        #     перебираем поля рукописи
-        # to_update[manuscript] = []
+            for man_field in man_fields:
+                if 'уточнить' in manuscript[man_field].lower() or 'уточняется' in manuscript[man_field].lower():
+                    if manuscript['id'] not in to_update_man:
+                        to_update_man.append(manuscript['id'])
             for img in manuscript['images']:
-        #         перебираем поля изображений
-        # if !manuscript in to_update:
-        #     to_update[manuscript] = []
-        # to_update[manuscript].append(img)
-                pass
+                for img_field in img_fields:
+                    if img[img_field]:
+                        if 'уточнить' in img[img_field].lower() or 'уточняется' in img[img_field].lower():
+                            if manuscript['id'] not in to_update_man:
+                                to_update_man.append(manuscript['id'])
+                            to_update_img.append(img['id'])
 
-        context['to_update'] = to_update
+        context['to_update_man'] = to_update_man
+        context['to_update_img'] = to_update_img
 
         return render(request, "manuscript_list.html", context=context)
 
@@ -90,7 +98,9 @@ class Manuscript_image(View):
     def get(self, request, *args, **kwargs):
         url = request.build_absolute_uri(reverse('manuscript-img-details',
                                                  kwargs={'pk': self.kwargs.get('pk')}))
+
         manuscript_img = requests.get(url).json()
+        print(manuscript_img)
 
         context = {
             'title': manuscript_img['cipher'],

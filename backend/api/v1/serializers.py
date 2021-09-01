@@ -29,7 +29,6 @@ class ManuscriptSetSerializer(serializers.ModelSerializer):
 class ImageInfoSerializer(serializers.ModelSerializer):
     cipher = serializers.StringRelatedField(source='manuscript.cipher')
     storage = serializers.StringRelatedField(source='manuscript.storage')
-    creation_date = serializers.StringRelatedField(source='manuscript.creation_date')
     type = serializers.StringRelatedField(source='manuscript.type')
     lec_type = serializers.StringRelatedField(source='manuscript.lec_type')
 

@@ -7,17 +7,21 @@
 
 {% block content %}
 {#    {{ manuscript_list_api }}#}
+{#    {{ to_update_man }}#}
+{#    {{ to_update_img }}#}
     <div class="container main">
         <div class="row">
             <div class="col-7">
                 {% for manuscript_info in manuscript_list_api %}
-                    <div class="manuscript-item"
+                    <div class="manuscript-item {% if manuscript_info.id in to_update_man %}update{% endif %}"
                                 data-creation-date-bgn="{{ manuscript_info.creation_date_bgn }}"
-                                data-creation-date-end="{{ manuscript_info.creation_date_end }}">
+                                data-creation-date-end="{{ manuscript_info.creation_date_end }}"
+                                data-man-id="{{ manuscript_info.id }}">
                         <a href="{% url 'manuscript-item' manuscript_info.id %}"><h1 class="cipher-name">{{ manuscript_info.cipher }}</h1>
                         </a>
                         {% for img in manuscript_info.images %}
-                            <a rel="nofollow" href="{% url "manuscript-img" img.id %}" class="img"
+
+                            <a rel="nofollow" href="{% url "manuscript-img" img.id %}" class="img {% if img.id in to_update_img %}update{% endif %}"
                                data-lec-month-type="{{ img.lec_month_type }}"
                                data-gospel="{{ img.gospel }}"
                                data-lec-part-type="{{ img.lec_part_type }}"
@@ -29,8 +33,9 @@
                                data-image-name="{{ img.image_name }}"
                                data-creation-date-bgn="{{ img.creation_date_bgn }}"
                                data-creation-date-end="{{ img.creation_date_end }}"
+                               data-img-id="{{ img.id }}"
                             >
-                                <img src="{{ img.image }}" width="100" height="100" alt="">
+                                <img src="{{ img.image }}" width="100" height="100" alt="" class="image">
                             </a>
                         {% endfor %}
                         <p class="storage"><u>Storage:</u> {{ manuscript_info.storage }}</p>
@@ -170,13 +175,17 @@
                         <input type="text" class="form-control" id="image-name-input">
                         <button type="button" class="btn-outline-dark btn" id="image-name-btn">Применить</button>
                     </div>
+                </divЮ
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="is_update">
+                    <label class="form-check-label" for="flexCheckDefault">
+                    Информация требует уточнения
+                  </label>
                 </div>
                 <br>
                 <button type="button" class="btn-dark btn" id="filters_clear">Сбросить все фильтры</button>
             </div>
         </div>
+        </div>
     </div>
 {% endblock %}
-
-
-

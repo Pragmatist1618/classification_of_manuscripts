@@ -18,6 +18,8 @@ $(document).ready(function (message) {
     let input_image_name = $('#image-name-input');
     let input_img_creation_date = $('#img-creation-date-input');
 
+    let checkbox_update = $('#is_update')
+
 
     // обновление полей фильтра (при изменении любого)
     function refilter() {
@@ -88,6 +90,9 @@ $(document).ready(function (message) {
                 manuscript.style.display = 'none';
             }
         }
+
+        //показать элементы требующие уточнения
+        update_filter();
     }
 
 
@@ -504,6 +509,43 @@ $(document).ready(function (message) {
 
     if (document.getElementById('filters_clear')) {
         document.getElementById('filters_clear').addEventListener('click', filters_clear, true);
+    }
+
+
+    // CHECKBOX UPDATE
+    function update_filter() {
+        if ($('#is_update').is(':checked')){
+            let manuscripts = document.querySelectorAll('.manuscript-item');
+            for (let manuscript of manuscripts) {
+                if (!manuscript.classList.contains('update')){
+                    manuscript.style.display = 'none';
+                }
+            }
+            let imgs = document.querySelectorAll('.img');
+            for (let img of imgs) {
+                if (!img.classList.contains('update')){
+                    img.style.display = 'none';
+                }
+            }
+        }
+        // let val = input_image_name.val();
+        // let imgs = document.querySelectorAll('.img');
+        // for (let img of imgs) {
+        //     let image_name = img.getAttribute("data-image-name")
+        //     if (val !== "") {
+        //         if (!image_name.toLowerCase().includes(val.toLowerCase())) {
+        //             img.style.display = 'none';
+        //         }
+        //     }
+        // }
+    }
+
+    function is_update() {
+        refilter();
+    }
+
+    if (document.getElementById('is_update')) {
+        document.getElementById('is_update').addEventListener('click', is_update, true);
     }
 
     //функция выравнивания высоты и ширины изображений для корректного поворота

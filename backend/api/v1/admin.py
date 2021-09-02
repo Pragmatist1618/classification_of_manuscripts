@@ -16,7 +16,7 @@ class ManuscriptAdmin(admin.ModelAdmin):
 
 class ImageAdmin(admin.ModelAdmin):
     # какие поля модели мы будем видеть в списке
-    list_display = ('id', 'image', 'manuscript', 'list_number', 'part_of_list')
+    list_display = ('id', 'image', 'manuscript', 'folio_number', 'part_of_folio')
     # по каким полям мы можем искать
     # search_fields = ('id', 'manuscript')
     # что мы можем модифицировать из списка (не открывая запись)

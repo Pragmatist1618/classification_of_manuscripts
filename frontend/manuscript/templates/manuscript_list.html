@@ -22,8 +22,8 @@
                                data-lec-month-type="{{ img.lec_month_type }}"
                                data-gospel="{{ img.gospel }}"
                                data-lec-part-type="{{ img.lec_part_type }}"
-                               data-part-of-list="{{ img.part_of_list }}"
-                               data-list-number="{{ img.list_number }}"
+                               data-part-of-folio="{{ img.part_of_folio }}"
+                               data-folio-number="{{ img.folio_number }}"
                                data-chapter="{{ img.chapter }}"
                                data-verse="{{ img.verse }}"
                                data-verse-quote="{{ img.verse_quote }}"
@@ -126,18 +126,18 @@
                     </select>
                 </div>
                 <div>
-                List_number: <br>
+                folio_number: <br>
                     <div class="input-group input-group-sm">
-                        <input type="text" class="form-control" id="list-number-input">
-                        <button type="button" class="btn-outline-dark btn" id="list-number-btn">Применить</button>
+                        <input type="text" class="form-control" id="folio-number-input">
+                        <button type="button" class="btn-outline-dark btn" id="folio-number-btn">Применить</button>
                     </div>
                 </div>
                 <div>
-                    Part_of_list: <br>
-                    <select name="part_of_list" id="part_of_list">
+                    Part_of_folio: <br>
+                    <select name="part_of_folio" id="part_of_folio">
                         <option value="-">Не выбрано</option>
-                        {% for part_of_list in part_of_lists %}
-                            <option value="{{ part_of_list }}">{{ part_of_list }}</option>
+                        {% for part_of_folio in part_of_folios %}
+                            <option value="{{ part_of_folio }}">{{ part_of_folio }}</option>
                         {% endfor %}
                     </select>
                 </div>

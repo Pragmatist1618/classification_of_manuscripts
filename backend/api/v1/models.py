@@ -58,8 +58,8 @@ class Image(models.Model):
     creation_date = models.CharField(max_length=25, default='Неизвестно', null=True, blank=True)
     creation_date_bgn = models.CharField(max_length=25, null=True, blank=True)
     creation_date_end = models.CharField(max_length=25, null=True, blank=True)
-    list_number = models.CharField(max_length=5)
-    part_of_list = models.CharField(max_length=50, null=True, blank=True)
+    folio_number = models.CharField(max_length=5)
+    part_of_folio = models.CharField(max_length=50, null=True, blank=True)
 
 
 

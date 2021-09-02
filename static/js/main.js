@@ -6,12 +6,12 @@ $(document).ready(function (message) {
     let select_lec_type = $('#lec_type');
     let select_lec_month_type = $('#lec_month_type');
     let select_gospel = $('#gospel');
-    let select_part_of_list = $('#part_of_list');
+    let select_part_of_folio = $('#part_of_folio');
     let select_lec_part_type = $('#lec_part_type');
 
     let input_man_creation_date = $('#man-creation-date-input');
     let input_cipher = $('#cipher-input');
-    let input_list_number = $('#list-number-input');
+    let input_folio_number = $('#folio-number-input');
     let input_chapter = $('#chapter-input');
     let input_verse = $('#verse-input');
     let input_verse_quote = $('#verse-quote-input');
@@ -53,13 +53,13 @@ $(document).ready(function (message) {
         //
         set_gospel_filter();
         //по положению на листе
-        set_part_of_list_filter();
+        set_part_of_folio_filter();
         //
         set_lec_part_type_filter();
         //
         cipher_filter();
         //
-        list_number_filter();
+        folio_number_filter();
         //
         chapter_filter();
         //
@@ -208,19 +208,19 @@ $(document).ready(function (message) {
     })
 
 
-    function set_part_of_list_filter() {
-        let part_of_list_val = select_part_of_list.val()
+    function set_part_of_folio_filter() {
+        let part_of_folio_val = select_part_of_folio.val()
 
         let imgs = document.querySelectorAll('.img');
         for (let img of imgs) {
-            let img_part_of_list = img.getAttribute("data-part-of-list")
-            if (part_of_list_val !== img_part_of_list && part_of_list_val !== '-') {
+            let img_part_of_folio = img.getAttribute("data-part-of-folio")
+            if (part_of_folio_val !== img_part_of_folio && part_of_folio_val !== '-') {
                 img.style.display = 'none';
             }
         }
     }
 
-    select_part_of_list.change(function () {
+    select_part_of_folio.change(function () {
         refilter();
     })
 
@@ -266,30 +266,30 @@ $(document).ready(function (message) {
     }
 
 
-    // LIST_NUMBER
-    function list_number_filter() {
-        let val = input_list_number.val();
+    // FOLIO_NUMBER
+    function folio_number_filter() {
+        let val = input_folio_number.val();
         let imgs = document.querySelectorAll('.img');
         for (let img of imgs) {
-            let list_number_name = img.getAttribute("data-list-number")
+            let folio_number_name = img.getAttribute("data-folio-number")
             if (val !== "") {
                 if (val.toLowerCase() === 'r' || val.toLowerCase() === 'v') {
-                    if (!list_number_name.toLowerCase().includes(val.toLowerCase())) {
+                    if (!folio_number_name.toLowerCase().includes(val.toLowerCase())) {
                         img.style.display = 'none';
                     }
-                } else if (list_number_name !== val) {
+                } else if (folio_number_name !== val) {
                     img.style.display = 'none';
                 }
             }
         }
     }
 
-    function list_number_btn_click() {
+    function folio_number_btn_click() {
         refilter();
     }
 
-    if (document.getElementById('list-number-btn')) {
-        document.getElementById('list-number-btn').addEventListener('click', list_number_btn_click, true);
+    if (document.getElementById('folio-number-btn')) {
+        document.getElementById('folio-number-btn').addEventListener('click', folio_number_btn_click, true);
     }
 
     // CHAPTER
@@ -494,13 +494,13 @@ $(document).ready(function (message) {
         select_lec_type.val('-');
         select_lec_month_type.val('-');
         select_gospel.val('-');
-        select_part_of_list.val('-');
+        select_part_of_folio.val('-');
         select_lec_part_type.val('-');
 
         input_man_creation_date.val('');
         input_img_creation_date.val('');
         input_cipher.val('');
-        input_list_number.val('');
+        input_folio_number.val('');
         input_chapter.val('');
         input_verse.val('');
         input_verse_quote.val('');

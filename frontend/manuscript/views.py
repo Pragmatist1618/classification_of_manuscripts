@@ -13,7 +13,7 @@ class Manuscript_list(View):
         lec_types = []
 
         gospels = []
-        part_of_lists = []
+        part_of_folios = []
         lec_part_types = []
 
         for manuscript in manuscript_list_api.json():
@@ -27,8 +27,8 @@ class Manuscript_list(View):
                 if not img['gospel'] in gospels and img['gospel'] is not None:
                     gospels.append(img['gospel'])
 
-                if not img['part_of_list'] in part_of_lists and img['part_of_list'] is not None:
-                    part_of_lists.append(img['part_of_list'])
+                if not img['part_of_folio'] in part_of_folios and img['part_of_folio'] is not None:
+                    part_of_folios.append(img['part_of_folio'])
 
                 if not img['lec_part_type'] in lec_part_types and img['lec_part_type'] is not None:
                     lec_part_types.append(img['lec_part_type'])
@@ -37,7 +37,7 @@ class Manuscript_list(View):
         context['lec_types'] = lec_types
 
         context['gospels'] = gospels
-        context['part_of_lists'] = part_of_lists
+        context['part_of_folios'] = part_of_folios
         context['lec_part_types'] = lec_part_types
 
         LEC_MONTH_CHOICES = [
@@ -61,7 +61,7 @@ class Manuscript_list(View):
         to_update_man = []
         to_update_img = []
         man_fields = ['storage', 'creation_date', 'cipher', 'man_description', 'bibliography']
-        img_fields = ['creation_date', 'list_number', 'part_of_list', 'chapter', 'verse', 'verse_quote',
+        img_fields = ['creation_date', 'folio_number', 'part_of_folio', 'chapter', 'verse', 'verse_quote',
                       'image_name', 'img_description']
         for manuscript in manuscript_list_api.json():
             for man_field in man_fields:

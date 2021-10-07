@@ -1,20 +1,8 @@
-from rest_framework.views import APIView
-from classification_of_manuscripts.settings_local import SERVER_VERSION
-from rest_framework.renderers import TemplateHTMLRenderer
-from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from django.shortcuts import render
+from django.views.generic.base import View
 
 
-class About(APIView):
-    renderer_classes = [TemplateHTMLRenderer]
-    # permission_classes = [IsAuthenticated]
-    permission_classes = [AllowAny]
-    template_name = 'about.html'
-
-    def get(self, request):
-        context = {
-            'server_version': SERVER_VERSION,
-            # 'username': request.user
-        }
-        print()
-        return Response(context)
+class About(View):
+    def get(self, request, *args, **kwargs):
+        context = {'title': 'About', 'url_name': 'about'}
+        return render(request, "about.html", context=context)

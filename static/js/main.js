@@ -139,7 +139,7 @@ $(document).ready(function (message) {
         let manuscripts = document.querySelectorAll('.manuscript-item');
         for (let manuscript of manuscripts) {
             let man_val = manuscript.querySelector('.storage').textContent;
-            man_val = man_val.replace('Storage: ', '')
+            man_val = man_val.replace('Место хранения: ', '')
             if (man_val !== storage_val && storage_val !== '-') {
                 manuscript.style.display = 'none';
             }
@@ -661,4 +661,22 @@ $(document).ready(function (message) {
         return false;
     });
 
+
+    let filter = $('#get-filter');
+    if (filter){
+        if (filter.attr('data-filter-key') === 'filter') {
+            if (filter.attr('data-filter-value')) {
+                let val = filter.attr('data-filter-value');
+                $("option:contains(" + val + ")").attr('selected', true)
+                refilter();
+            }
+        }
+        else if (filter.attr('data-filter-key') === 'filter-date') {
+            if (filter.attr('data-filter-value') !== 'None-None') {
+                $('#man-creation-date-input').val(filter.attr('data-filter-value'))
+                refilter();
+            }
+        }
+
+    }
 })

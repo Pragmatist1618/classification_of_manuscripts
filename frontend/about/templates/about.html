@@ -1,31 +1,17 @@
-{% extends 'rest_framework/base.html' %}
+{% extends 'base.html' %}
 
 {% block title %}
-    About
+    {{ title }}
 {% endblock title %}
-
-{% block breadcrumbs_empty %}
-    <span class="active">About</span>
-{% endblock breadcrumbs_empty %}
 
 
 {% block content %}
-    <div class="container">
-        <p></p>
+    <div class="container mt-3">
+        <div>
+            <h3>О ресурсе:</h3>
+            <p>
+                text
+            </p>
 
-        <p>
-            <b>Server version: <span style="color: darkred">{{ server_version }}</span></b>
-        </p>
-
-
-        <p>
-            <b>- <a href="{% url 'manuscript-api-list' %}">api/v1/manuscript/</a></b>
-            (список записей);
-        </p>
-        <p>
-            <b>- <a href="{% url 'manuscript-img-list' %}">api/v1/manuscript/img/</a></b>
-            (список изображений);
-        </p>
-
-    </div>
-{% endblock content %}
+        </div>
+{% endblock %}

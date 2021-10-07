@@ -2,11 +2,12 @@ import requests
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.generic.base import View
+from urllib.parse import unquote
 
 
 class Manuscript_list(View):
     def get(self, request, *args, **kwargs):
-        context = {'title': 'Manuscript list'}
+        context = {'title': 'Manuscript list', 'url_name': 'manuscript'}
         manuscript_list_api = requests.get(request.build_absolute_uri(reverse('manuscript-api-list')))
         context['manuscript_list_api'] = manuscript_list_api.json()
         storages = []
@@ -78,6 +79,10 @@ class Manuscript_list(View):
 
         context['to_update_man'] = to_update_man
         context['to_update_img'] = to_update_img
+
+        if request.GET.urlencode().split('=') != ['']:
+            context['filter_key'] = unquote(request.GET.urlencode().split('=')[0]).replace('+', ' ')
+            context['filter_value'] = unquote(request.GET.urlencode().split('=')[1]).replace('+', ' ')
 
         return render(request, "manuscript_list.html", context=context)
 
